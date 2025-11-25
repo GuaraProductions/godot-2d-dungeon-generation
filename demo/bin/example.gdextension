@@ -1,7 +1,8 @@
 [configuration]
 
 entry_symbol = "example_library_init"
-compatibility_minimum = "4.1"
+compatibility_minimum = "4.5"
+reloadable=true
 
 [libraries]
 ; Relative paths ensure that our GDExtension can be placed anywhere in the project directory.
@@ -25,7 +26,7 @@ windows.x86_64.double.debug = "./windows/EXTENSION-NAME.windows.template_debug.x
 windows.x86_64.single.release = "./windows/EXTENSION-NAME.windows.template_release.x86_64.dll"
 windows.x86_64.double.release = "./windows/EXTENSION-NAME.windows.template_release.x86_64.double.dll"
 
-linux.x86_64.single.debug = "./linux/libEXTENSION-NAME.linux.template_debug.x86_64.so"
+linux.x86_64.single.debug = "./linux/libGodot2D-DungeonGenerationCpp.linux.template_debug.x86_64.so"
 linux.x86_64.double.debug = "./linux/libEXTENSION-NAME.linux.template_debug.x86_64.double.so"
 linux.x86_64.single.release = "./linux/libEXTENSION-NAME.linux.template_release.x86_64.so"
 linux.x86_64.double.release = "./linux/libEXTENSION-NAME.linux.template_release.x86_64.double.so"

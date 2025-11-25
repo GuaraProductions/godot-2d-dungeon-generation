@@ -1,6 +1,6 @@
 extends Node
 
+@onready var dungeon_generator_2d: DungeonGenerator2D = $DungeonGenerator2D
 
 func _ready() -> void:
-	var example := ExampleClass.new()
-	example.print_type(example)
+	print(dungeon_generator_2d.dungeon_size)
