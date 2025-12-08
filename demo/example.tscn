@@ -1,15 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dh0oj81pufivs"]
+[gd_scene load_steps=2 format=3 uid="uid://dh0oj81pufivs"]
 
 [ext_resource type="Script" uid="uid://bkwk40ybs8kgm" path="res://example.gd" id="1_jdh55"]
-[ext_resource type="Texture2D" uid="uid://dbx66sovxd1" path="res://icon.svg" id="2_n51mc"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_jdh55")
 
-[node name="GDExample" type="GDExample" parent="."]
-position = Vector2(0.20744114, 15.190416)
-texture = ExtResource("2_n51mc")
-
-[node name="DungeonGenerator2D" type="DungeonGenerator2D" parent="."]
-on_ready = false
-dungeon_size = Vector2i(120, 0)
+[node name="Primm2D" type="Primm2D" parent="."]

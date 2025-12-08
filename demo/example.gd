@@ -1,6 +1,7 @@
 extends Node
 
-@onready var dungeon_generator_2d: DungeonGenerator2D = $DungeonGenerator2D
+@onready var primm_2d: Primm2D = $Primm2D
 
 func _ready() -> void:
-	print(dungeon_generator_2d.dungeon_size)
+	pass
+	#corridor_generator.generate_corridor()

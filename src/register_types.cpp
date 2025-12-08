@@ -2,6 +2,9 @@
 
 #include "gdexample.h"
 #include "dungeon_generator_2d.h"
+#include "corridor_generator.h"
+#include "room_generator.h"
+#include "primm2d.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -16,6 +19,10 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 
 	ClassDB::register_class<GDExample>();
 	ClassDB::register_class<DungeonGenerator2D>();
+	ClassDB::register_class<Primm2D>();
+
+	ClassDB::register_abstract_class<CorridorGenerator>();
+	ClassDB::register_abstract_class<RoomGenerator>();
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {
