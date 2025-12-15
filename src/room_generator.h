@@ -12,8 +12,6 @@ class RoomGenerator : public Node {
 
 private:
 
-	int radius;
-	int num_checks_before_rejection;
 	Node* dungeon_generator;
 
 protected:
@@ -26,8 +24,6 @@ public:
 
 	void _ready() override;
 	virtual TypedArray<Vector2i> generate_rooms(Vector2i dimension);
-	void set_radius(int p_radius);
-	int get_radius() const;
 };
 
 } // namespace godot

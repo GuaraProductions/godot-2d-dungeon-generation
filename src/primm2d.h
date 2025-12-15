@@ -12,14 +12,16 @@ private:
 
 	Node* dungeon_generator;
 
+	
+	Vector2i calculate_step(Vector2i a, Vector2i b);
+	void open_between(Vector2i a, Vector2i b);
+
 protected:
 	static void _bind_methods();
 
 public:
 
-	Primm2D();
-	~Primm2D();
-
+	void _ready() override;
 	void generate_corridor(TypedArray<Vector2i> points) override;
 	void open_path_in_dungeon(Vector2i initial, Vector2i end);
 };

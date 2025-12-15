@@ -6,7 +6,7 @@ from methods import print_error
 
 
 libname = "Godot2D-DungeonGenerationCpp"
-projectdir = "demo"
+projectdir = "geracaoprocedural2d"
 
 localEnv = Environment(tools=["default"], PLATFORM="")
 
