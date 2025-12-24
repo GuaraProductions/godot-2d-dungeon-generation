@@ -5,7 +5,10 @@
 #include "corridor_generator.h"
 #include "room_generator.h"
 #include "primm2d.h"
-#include"poisson_disk_sampling.h"
+#include "poisson_disk_sampling.h"
+#include "vector_marker_2d.h"
+#include "dungeon_2d.h"
+#include "dungeon_collection.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -22,9 +25,12 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_abstract_class<RoomGenerator>();
 
 	ClassDB::register_class<GDExample>();
-	ClassDB::register_class<DungeonGenerator2D>();
 	ClassDB::register_class<Primm2D>();
 	ClassDB::register_class<PoissonDiskSampling>();
+	ClassDB::register_class<VectorMarker2DCpp>();
+	ClassDB::register_class<Dungeon2DCpp>();
+	ClassDB::register_class<DungeonCollectionCpp>();
+	ClassDB::register_class<DungeonGenerator2D>();
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {

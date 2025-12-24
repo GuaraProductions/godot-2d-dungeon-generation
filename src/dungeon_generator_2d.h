@@ -3,30 +3,14 @@
 #include <godot_cpp/classes/node2d.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/variant/array.hpp>
+#include <godot_cpp/classes/ref_counted.hpp>
+#include <godot_cpp/variant/typed_array.hpp>
 #include <godot_cpp/variant/vector2i.hpp>
-
-/*
-## Quantidade de salas presentes em uma cena
-@export var executar_no_ready : bool = false
-@export var tamanho_dungeon : Vector2i
-@export var gerador_de_salas : GeradorSala2D
-@export var gerador_de_corredores : GeradorCorredor2D
-## Cenas que serão usadas como salas (Precisam ser do tipo DungeonRoom)
-@export_category("Cenas")
-@export var dungeons : DungeonCollection2D
-## Cenas que serão usadas como corredores (Precisam ser do tipo DungeonRoom)
-@export var corredores : DungeonCollection2D
-## Indica o tamanho de cada sala (dungeon e corredor)
-@export var tamanho_sala : Vector2i
-## Matrix 2D representando a dungeon
-@export_category("Cache")
-@export var usar_cache : bool
-@export var dungeon_cache : DungeonCache
-@export_category("Debug")
-@export var executar_no_editor : bool = false
-@export var imprimir_dungeon_no_terminal : bool = false
-
-*/
+#include <godot_cpp/variant/variant.hpp>
+#include "room_generator.h"
+#include "corridor_generator.h"
+#include "dungeon_2d.h"
+#include "dungeon_collection.h"
 
 namespace godot {
 
@@ -40,12 +24,11 @@ private:
 	bool print_in_terminal;
 	godot::Vector2i dungeon_size;
 	godot::Vector2i room_size;
-	//RoomGenerator2D
-	//CorridorGenerator2D
-	//DungeonCollection2D (Rooms)
-	//DungeonCollection2D (Corridors)
-	godot::Array dungeon_grid ;
-	//DungeonCache2D
+	RoomGenerator* room_generator;
+	CorridorGenerator* corridor_generator;
+	Ref<DungeonCollectionCpp> available_rooms;
+	Ref<DungeonCollectionCpp> available_corridors;
+	int** dungeon_grid ;
 
 protected:
 	static void _bind_methods();
@@ -61,6 +44,8 @@ public:
 	DungeonGenerator2D();
 	~DungeonGenerator2D();
 
+	void _ready() override;
+
 	void set_on_ready(bool p_on_ready);
 	bool get_on_ready() const;
 
@@ -69,6 +54,18 @@ public:
 
 	void set_print_in_terminal(bool p_print_in_terminal);
 	bool get_print_in_terminal() const;
+
+	void set_room_generator(RoomGenerator* p_room_generator);
+	RoomGenerator* get_room_generator() const;
+
+	void set_corridor_generator(CorridorGenerator* p_corridor_generator);
+	CorridorGenerator* get_corridor_generator() const;
+
+	void set_room_collection(Ref<DungeonCollectionCpp> p_available_rooms);
+	Ref<DungeonCollectionCpp> get_room_collection() const;
+
+	void set_corridor_collection(Ref<DungeonCollectionCpp> p_corridor_collection);
+	Ref<DungeonCollectionCpp> get_corridor_collection() const;
 
 	void set_dungeon_size(godot::Vector2i p_dungeon_size);
 	godot::Vector2i get_dungeon_size() const;

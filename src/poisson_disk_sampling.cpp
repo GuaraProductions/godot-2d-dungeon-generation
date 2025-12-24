@@ -73,8 +73,6 @@ TypedArray<Vector2i> PoissonDiskSampling::generate_rooms(Vector2i dimension) {
 
     Vector2i middle_point = Vector2i(dimension.x/2, dimension.y/2);
     active_points.append(middle_point);
-    godot::UtilityFunctions::print("dungeon generator == null? ", dungeon_generator == NULL);
-    dungeon_generator->call("criar_sala", middle_point);
 
     while (!active_points.is_empty()) {
         //godot::UtilityFunctions::print("while (!active_points.is_empty()) ");
