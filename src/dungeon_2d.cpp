@@ -8,7 +8,7 @@
 using namespace godot;
 
 void Dungeon2DCpp::_bind_methods() {
-
+    ClassDB::bind_method(D_METHOD("remove_tile_from_door"), &Dungeon2DCpp::remove_tile_from_door);
 }
 
 Dungeon2DCpp::Dungeon2DCpp() {
@@ -38,4 +38,16 @@ void Dungeon2DCpp::_ready() {
 
 void Dungeon2DCpp::remove_tile_from_door(Vector2i direction) {
 
+    if (exits_and_vectors.has(direction)) {
+
+        VectorMarker2DCpp* direction = Object::cast_to<VectorMarker2DCpp>(exits_and_vectors[direction]);
+
+        for (int i = 0; i < get_child_count(); i++) {
+            VectorMarker2DCpp* child = Object::cast_to<VectorMarker2DCpp>(get_child(i));
+            if (child) {
+                child->queue_free();
+                child = nullptr;
+            }
+        }
+    }
 }

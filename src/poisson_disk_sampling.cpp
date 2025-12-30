@@ -75,13 +75,14 @@ TypedArray<Vector2i> PoissonDiskSampling::generate_rooms(Vector2i dimension) {
     active_points.append(middle_point);
 
     while (!active_points.is_empty()) {
-        //godot::UtilityFunctions::print("while (!active_points.is_empty()) ");
+        //UtilityFunctions::print("(Poisson) while");
         Vector2i current_point = active_points.pick_random();
         bool candidate_point_accepted = false;
 
         for (int i = num_checks_before_rejection; i >= 0; i--) {
 
-            //godot::UtilityFunctions::print("for (int i = num_checks_before_rejection; i >= 0; i--)");
+            //UtilityFunctions::print("(Poisson) for");
+            //UtilityFunctions::print("(Poisson) i = ", i);
             float angle = rng->randf() * PI * 2;
             auto direction = Vector2(sin(angle), cos(angle));
 
@@ -90,10 +91,12 @@ TypedArray<Vector2i> PoissonDiskSampling::generate_rooms(Vector2i dimension) {
 
             if (is_valid(candidate_position, dimension)) {
 
+                //UtilityFunctions::print("(Poisson) valid position ", candidate_position);
+
                 points.append(candidate_position);
                 active_points.append(candidate_position);
 
-                dungeon_generator->call("criar_sala", candidate_position);
+                dungeon_generator->call("create_room", candidate_position, Vector2i(0,0));
 
                 candidate_point_accepted = true;
 
@@ -129,14 +132,15 @@ bool PoissonDiskSampling::is_valid(Vector2i candidate_point, Vector2i dimension)
         for (int y = y_initial; y < y_final; y++) {
             
             auto test_point = Vector2i(x, y);
-
-            if ((bool)dungeon_generator->call("existe_sala_em", test_point)) {
-                
+            if ((bool)dungeon_generator->call("exists_dungeon_in", test_point)) {
+                //UtilityFunctions::print("exists?", test_point);
                 float points_distance = candidate_point.distance_squared_to(test_point);
 
                 is_valid = points_distance > radius * radius;
-                if (!is_valid) 
+                if (!is_valid) {
+
                     break;
+                }
             }
         }
 

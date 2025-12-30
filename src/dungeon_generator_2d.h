@@ -1,6 +1,5 @@
-#pragma once
-
 #include <godot_cpp/classes/node2d.hpp>
+#include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/classes/ref_counted.hpp>
@@ -12,6 +11,9 @@
 #include "dungeon_2d.h"
 #include "dungeon_collection.h"
 
+#pragma once
+
+
 namespace godot {
 
 class DungeonGenerator2D : public Node2D {
@@ -22,13 +24,22 @@ private:
 	bool on_ready;
 	bool use_cache;
 	bool print_in_terminal;
-	godot::Vector2i dungeon_size;
-	godot::Vector2i room_size;
+	bool grid_initialized;
+
+	Vector2i dungeon_size;
+	Vector2i room_size;
+
 	RoomGenerator* room_generator;
 	CorridorGenerator* corridor_generator;
+
 	Ref<DungeonCollectionCpp> available_rooms;
 	Ref<DungeonCollectionCpp> available_corridors;
-	int** dungeon_grid ;
+
+	int** dungeon_grid;
+
+	void generate_dungeon();
+    void init_dungeon_grid();
+    void free_dungeon_grid();
 
 protected:
 	static void _bind_methods();
@@ -67,8 +78,19 @@ public:
 	void set_corridor_collection(Ref<DungeonCollectionCpp> p_corridor_collection);
 	Ref<DungeonCollectionCpp> get_corridor_collection() const;
 
-	void set_dungeon_size(godot::Vector2i p_dungeon_size);
-	godot::Vector2i get_dungeon_size() const;
+	void set_dungeon_size(Vector2i p_dungeon_size);
+	Vector2i get_dungeon_size() const;
+
+	void set_room_size(Vector2i p_dungeon_size);
+	Vector2i get_room_size() const;
+
+	void print_dungeon_in_text();
+
+	Dungeon2DCpp* create_room(Vector2i position, Vector2i direction = Vector2i(0,0));
+	Dungeon2DCpp* create_corridor(Vector2i position);
+	Dungeon2DCpp* get_dungeon_in(Vector2i position);
+	bool exists_dungeon_in(Vector2i position);
+	bool is_empty(Vector2i position);
 };
 
 } // namespace godot

@@ -87,8 +87,8 @@ void Primm2D::open_path_in_dungeon(Vector2i initial, Vector2i end) {
             x += (x < x2 ? 1 : -1);
 
         Vector2i posicao_atual = Vector2i(x, y);
-        if ((bool)dungeon_generator->call("eh_espaco_vazio", posicao_atual)) 
-            dungeon_generator->call("criar_corredor", posicao_atual);
+        if ((bool)dungeon_generator->call("is_empty", posicao_atual)) 
+            dungeon_generator->call("create_corridor", posicao_atual);
         
         path.push_back(posicao_atual);
     }
@@ -111,12 +111,12 @@ void Primm2D::open_between(Vector2i a, Vector2i b) {
     Vector2i direction = calculate_step(a, b);
 
     Node* dungeon_a = 
-        Object::cast_to<Node>(dungeon_generator->call("get_dungeon_em", a)); 
+        Object::cast_to<Node>(dungeon_generator->call("get_dungeon_in", a)); 
     Node* dungeon_b = 
-        Object::cast_to<Node>(dungeon_generator->call("get_dungeon_em", b)); 
+        Object::cast_to<Node>(dungeon_generator->call("get_dungeon_in", b)); 
 
     if (dungeon_a != NULL)
-        dungeon_a->call("remover_tile_de_porta", direction);
+        dungeon_a->call("remove_tile_from_door", direction);
     if (dungeon_b != NULL)
-        dungeon_b->call("remover_tile_de_porta", -direction);
+        dungeon_b->call("remove_tile_from_door", -direction);
 }

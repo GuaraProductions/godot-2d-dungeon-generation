@@ -1,9 +1,9 @@
+#pragma once
+
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/variant/typed_array.hpp>
 #include <godot_cpp/variant/vector2i.hpp>
 #include <godot_cpp/variant/variant.hpp>
-
-#pragma once
 
 namespace godot {
 
