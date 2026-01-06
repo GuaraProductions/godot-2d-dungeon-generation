@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="Dungeon2DCpp" inherits="Node2D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Represents a single dungeon room with exits and connections.
+	</brief_description>
+	<description>
+		Dungeon2DCpp is a Node2D-based class that manages a single dungeon room, including its size, exits, and door management. It tracks vector markers that indicate where doors and exits are located.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="get_room_size" qualifiers="const">
+			<return type="Vector2" />
+			<description>
+				Gets the size of the room.
+			</description>
+		</method>
+		<method name="remove_tile_from_door">
+			<return type="void" />
+			<param index="0" name="direction" type="Vector2i" />
+			<description>
+				Removes tiles from a door in the specified direction.
+				This method removes all child nodes from the vector marker corresponding to the given direction, effectively removing the door tiles.
+			</description>
+		</method>
+		<method name="set_room_size">
+			<return type="void" />
+			<description>
+				Sets the room size (currently not implemented).
+			</description>
+		</method>
+	</methods>
+</class>

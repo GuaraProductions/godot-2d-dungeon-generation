@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="PoissonDiskSampling" inherits="RoomGenerator" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Implements Poisson disk sampling for generating evenly-distributed room positions.
+	</brief_description>
+	<description>
+		PoissonDiskSampling generates room positions using the Poisson disk sampling algorithm, which ensures a minimum distance between rooms while maintaining good spatial distribution. This creates more natural-looking dungeon layouts with rooms that are neither too clustered nor too evenly spaced.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="generate_rooms">
+			<return type="Vector2i[]" />
+			<param index="0" name="dimension" type="Vector2i" />
+			<description>
+				Generates room positions using Poisson disk sampling.
+				Implements the Poisson disk sampling algorithm to distribute rooms evenly across the dungeon space while maintaining a minimum distance between them.
+			</description>
+		</method>
+		<method name="get_num_checks_before_rejection" qualifiers="const">
+			<return type="int" />
+			<description>
+				Gets the number of candidate checks before rejection. This is the number of placement attempts per active point in the algorithm.
+			</description>
+		</method>
+		<method name="get_radius" qualifiers="const">
+			<return type="int" />
+			<description>
+				Gets the minimum radius between rooms in grid cells.
+			</description>
+		</method>
+		<method name="set_num_checks_before_rejection">
+			<return type="void" />
+			<param index="0" name="p_num_checks_before_rejection" type="int" />
+			<description>
+				Sets the number of candidate checks before rejection. Higher values produce more densely packed rooms but take longer to generate.
+			</description>
+		</method>
+		<method name="set_radius">
+			<return type="void" />
+			<param index="0" name="p_radius" type="int" />
+			<description>
+				Sets the minimum radius between rooms in grid cells. Larger values create more spacing between rooms.
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="num_checks_before_rejection" type="int" setter="set_num_checks_before_rejection" getter="get_num_checks_before_rejection" default="20">
+			Number of attempts to place a new room before rejecting a candidate point.
+		</member>
+		<member name="radius" type="int" setter="set_radius" getter="get_radius" default="3">
+			Minimum distance between room centers in grid cells.
+		</member>
+	</members>
+</class>

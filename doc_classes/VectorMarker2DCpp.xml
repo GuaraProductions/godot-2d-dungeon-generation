@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="VectorMarker2DCpp" inherits="Marker2D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		A 2D marker that indicates a directional exit or door in a dungeon room.
+	</brief_description>
+	<description>
+		VectorMarker2DCpp extends Marker2D to represent directional markers for room exits. It stores a direction vector and automatically adds itself to a group for easy identification. These markers are used by dungeon rooms to identify where doors and connections should be placed.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="get_direction" qualifiers="const">
+			<return type="Vector2i" />
+			<description>
+				Gets the direction vector of the marker representing the exit direction.
+			</description>
+		</method>
+		<method name="get_group_name" qualifiers="static">
+			<return type="StringName" />
+			<description>
+				Gets the group name used by all VectorMarker2DCpp instances.
+				All VectorMarker2DCpp nodes are automatically added to this group, allowing the dungeon system to find and manage them easily.
+				Returns "VectorMarker2DCpp".
+			</description>
+		</method>
+		<method name="set_direction">
+			<return type="void" />
+			<param index="0" name="p_direction" type="Vector2i" />
+			<description>
+				Sets the direction vector of the marker for the exit orientation (e.g., Vector2i(0,-1) for north).
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="direction" type="Vector2i" setter="set_direction" getter="get_direction" default="Vector2i(0, 0)">
+			Direction vector indicating the exit orientation.
+		</member>
+	</members>
+</class>

@@ -19,6 +19,11 @@ demo/bin/windows/*
 !demo/bin/*.gdextension
 .sconsign*.dblite
 
+# Build artifacts
+bin/
+build/
+dist/
+
 # Ignore custom.py
 custom.py
 

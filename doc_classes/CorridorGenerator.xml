@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="CorridorGenerator" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Base class for implementing corridor generation algorithms.
+	</brief_description>
+	<description>
+		CorridorGenerator is an abstract base class that defines the interface for generating corridors in a procedurally generated dungeon. Derived classes should implement specific algorithms for connecting rooms with corridors.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="generate_corridor">
+			<return type="void" />
+			<param index="0" name="points" type="Vector2i[]" />
+			<description>
+				Generates corridors connecting the given points.
+				This is a virtual method that should be overridden in derived classes to implement specific corridor generation algorithms.
+			</description>
+		</method>
+	</methods>
+</class>

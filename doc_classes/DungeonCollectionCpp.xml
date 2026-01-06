@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DungeonCollectionCpp" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Resource that holds a collection of dungeon room PackedScenes.
+	</brief_description>
+	<description>
+		DungeonCollectionCpp is a Resource-based class that manages a collection of PackedScene objects representing different dungeon rooms or corridors. It provides functionality to randomly select and instantiate rooms from the collection.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="get_random_dungeon">
+			<return type="Dungeon2DCpp" />
+			<description>
+				Gets a random dungeon room from the collection.
+				Randomly selects a PackedScene from the collection and instantiates it as a Dungeon2DCpp node.
+				Returns [code]null[/code] if the collection is empty.
+			</description>
+		</method>
+		<method name="get_scenes" qualifiers="const">
+			<return type="PackedScene[]" />
+			<description>
+				Gets a copy of the scenes array containing all PackedScene objects in the collection.
+			</description>
+		</method>
+		<method name="set_scenes">
+			<return type="void" />
+			<param index="0" name="p_scenes" type="PackedScene[]" />
+			<description>
+				Sets the scenes array with a new array of PackedScene objects to store in the collection.
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="scenes" type="PackedScene[]" setter="set_scenes" getter="get_scenes" default="[]">
+			Array of PackedScene objects representing dungeon rooms or corridors.
+		</member>
+	</members>
+</class>

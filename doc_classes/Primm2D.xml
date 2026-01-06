@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="Primm2D" inherits="CorridorGenerator" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Implements Prim's algorithm for connecting rooms with corridors.
+	</brief_description>
+	<description>
+		Primm2D uses Prim's minimum spanning tree algorithm to generate corridors that connect all rooms in the dungeon. This ensures all rooms are reachable while minimizing the total corridor length and creating a tree-like structure without cycles.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="generate_corridor">
+			<return type="void" />
+			<param index="0" name="points" type="Vector2i[]" />
+			<description>
+				Generates corridors using Prim's algorithm.
+				Implements Prim's minimum spanning tree algorithm to connect all room points with corridors while minimizing total path length.
+			</description>
+		</method>
+		<method name="open_path_in_dungeon">
+			<return type="void" />
+			<param index="0" name="initial" type="Vector2i" />
+			<param index="1" name="end" type="Vector2i" />
+			<description>
+				Opens a corridor path between two points in the dungeon.
+				Creates a Manhattan-distance path (horizontal then vertical, or vice versa) from the initial point to the end point, placing corridor tiles along the way.
+			</description>
+		</method>
+	</methods>
+</class>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="RoomGenerator" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Base class for implementing room generation algorithms.
+	</brief_description>
+	<description>
+		RoomGenerator is an abstract base class that defines the interface for generating room positions in a procedurally generated dungeon. Derived classes should implement specific algorithms for distributing rooms across the dungeon space.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="generate_rooms">
+			<return type="Vector2i[]" />
+			<param index="0" name="dimension" type="Vector2i" />
+			<description>
+				Generates room positions within the given dimensions.
+				This is a virtual method that should be overridden in derived classes to implement specific room generation algorithms (e.g., Poisson disk sampling, grid-based, random).
+			</description>
+		</method>
+	</methods>
+</class>

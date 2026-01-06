@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DungeonGenerator2D" inherits="Node2D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Main controller for generating procedural 2D dungeons.
+	</brief_description>
+	<description>
+		DungeonGenerator2D orchestrates the complete dungeon generation process by managing room and corridor generation, maintaining a grid-based dungeon layout, and instantiating dungeon elements in the scene. It supports configurable room and corridor generators, caching, and debug output.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="create_corridor">
+			<return type="Dungeon2DCpp" />
+			<param index="0" name="position" type="Vector2i" />
+			<description>
+				Creates and instantiates a corridor at the specified grid position.
+				Returns a pointer to the created Dungeon2DCpp corridor instance.
+			</description>
+		</method>
+		<method name="create_room">
+			<return type="Dungeon2DCpp" />
+			<param index="0" name="position" type="Vector2i" />
+			<param index="1" name="direction" type="Vector2i" default="Vector2i(0, 0)" />
+			<description>
+				Creates and instantiates a room at the specified grid position.
+				The optional [param direction] parameter can be used for room orientation.
+				Returns a pointer to the created Dungeon2DCpp room instance.
+			</description>
+		</method>
+		<method name="exists_dungeon_in">
+			<return type="bool" />
+			<param index="0" name="position" type="Vector2i" />
+			<description>
+				Checks if a dungeon element (room or corridor) exists at the specified grid position.
+				Returns [code]true[/code] if a dungeon element exists at the position.
+			</description>
+		</method>
+		<method name="get_corridor_collection" qualifiers="const">
+			<return type="DungeonCollectionCpp" />
+			<description>
+				Gets the collection of available corridor scenes.
+			</description>
+		</method>
+		<method name="get_corridor_generator" qualifiers="const">
+			<return type="CorridorGenerator" />
+			<description>
+				Gets the corridor generator node responsible for connecting rooms.
+			</description>
+		</method>
+		<method name="get_dungeon_in">
+			<return type="Dungeon2DCpp" />
+			<param index="0" name="position" type="Vector2i" />
+			<description>
+				Gets the dungeon element at the specified grid position.
+				Returns a pointer to the Dungeon2DCpp at that position, or [code]null[/code] if none exists.
+			</description>
+		</method>
+		<method name="get_dungeon_size" qualifiers="const">
+			<return type="Vector2i" />
+			<description>
+				Gets the size of the dungeon grid in cells.
+			</description>
+		</method>
+		<method name="get_on_ready" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Gets whether the dungeon will generate automatically when the node is ready.
+			</description>
+		</method>
+		<method name="get_print_in_terminal" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Gets whether debug information is printed to the terminal.
+			</description>
+		</method>
+		<method name="get_room_collection" qualifiers="const">
+			<return type="DungeonCollectionCpp" />
+			<description>
+				Gets the collection of available room scenes.
+			</description>
+		</method>
+		<method name="get_room_generator" qualifiers="const">
+			<return type="RoomGenerator" />
+			<description>
+				Gets the room generator node responsible for placing rooms.
+			</description>
+		</method>
+		<method name="get_room_size" qualifiers="const">
+			<return type="Vector2i" />
+			<description>
+				Gets the size of individual rooms in pixels or units.
+			</description>
+		</method>
+		<method name="get_use_cache" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Gets whether cached dungeon data is used.
+			</description>
+		</method>
+		<method name="is_empty">
+			<return type="bool" />
+			<param index="0" name="position" type="Vector2i" />
+			<description>
+				Checks if the specified grid position is empty (no room or corridor).
+				Returns [code]true[/code] if the position is empty.
+			</description>
+		</method>
+		<method name="print_dungeon_in_text">
+			<return type="void" />
+			<description>
+				Prints a text representation of the dungeon grid to the terminal for debugging purposes.
+			</description>
+		</method>
+		<method name="set_corridor_collection">
+			<return type="void" />
+			<param index="0" name="p_corridor_collection" type="DungeonCollectionCpp" />
+			<description>
+				Sets the collection of available corridor scenes.
+			</description>
+		</method>
+		<method name="set_corridor_generator">
+			<return type="void" />
+			<param index="0" name="p_corridor_generator" type="CorridorGenerator" />
+			<description>
+				Sets the corridor generator node that will be used to connect rooms.
+			</description>
+		</method>
+		<method name="set_dungeon_size">
+			<return type="void" />
+			<param index="0" name="p_dungeon_size" type="Vector2i" />
+			<description>
+				Sets the size of the dungeon grid in cells (width and height).
+			</description>
+		</method>
+		<method name="set_on_ready">
+			<return type="void" />
+			<param index="0" name="p_on_ready" type="bool" />
+			<description>
+				Sets whether to generate the dungeon automatically when [method Node._ready] is called.
+			</description>
+		</method>
+		<method name="set_print_in_terminal">
+			<return type="void" />
+			<param index="0" name="p_print_in_terminal" type="bool" />
+			<description>
+				Sets whether to print debug information to the terminal during generation.
+			</description>
+		</method>
+		<method name="set_room_collection">
+			<return type="void" />
+			<param index="0" name="p_room_collection" type="DungeonCollectionCpp" />
+			<description>
+				Sets the collection of available room scenes.
+			</description>
+		</method>
+		<method name="set_room_generator">
+			<return type="void" />
+			<param index="0" name="p_room_generator" type="RoomGenerator" />
+			<description>
+				Sets the room generator node that will be used to place rooms.
+			</description>
+		</method>
+		<method name="set_room_size">
+			<return type="void" />
+			<param index="0" name="p_room_size" type="Vector2i" />
+			<description>
+				Sets the size of individual rooms in pixels or units.
+			</description>
+		</method>
+		<method name="set_use_cache">
+			<return type="void" />
+			<param index="0" name="p_use_cache" type="bool" />
+			<description>
+				Sets whether to use cached dungeon data for faster regeneration.
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="corridor_collection" type="DungeonCollectionCpp" setter="set_corridor_collection" getter="get_corridor_collection">
+			Collection of available corridor scenes to randomly select from during generation.
+		</member>
+		<member name="corridor_generator" type="CorridorGenerator" setter="set_corridor_generator" getter="get_corridor_generator">
+			The corridor generator node responsible for connecting rooms with corridors.
+		</member>
+		<member name="dungeon_size" type="Vector2i" setter="set_dungeon_size" getter="get_dungeon_size" default="Vector2i(0, 0)">
+			Size of the entire dungeon in grid cells.
+		</member>
+		<member name="on_ready" type="bool" setter="set_on_ready" getter="get_on_ready" default="false">
+			Whether to generate the dungeon automatically when the node is ready.
+		</member>
+		<member name="print_in_terminal" type="bool" setter="set_print_in_terminal" getter="get_print_in_terminal" default="false">
+			Whether to print debug information to the terminal during generation.
+		</member>
+		<member name="room_collection" type="DungeonCollectionCpp" setter="set_room_collection" getter="get_room_collection">
+			Collection of available room scenes to randomly select from during generation.
+		</member>
+		<member name="room_generator" type="RoomGenerator" setter="set_room_generator" getter="get_room_generator">
+			The room generator node responsible for placing rooms in the dungeon.
+		</member>
+		<member name="room_size" type="Vector2i" setter="set_room_size" getter="get_room_size" default="Vector2i(0, 0)">
+			Size of each room in pixels or units.
+		</member>
+		<member name="use_cache" type="bool" setter="set_use_cache" getter="get_use_cache" default="false">
+			Whether to use cached dungeon data for faster regeneration.
+		</member>
+	</members>
+	<constants>
+		<constant name="EMPTY" value="0" enum="CellType">
+			Empty cell with no dungeon element.
+		</constant>
+		<constant name="ROOM" value="1" enum="CellType">
+			Cell containing a room.
+		</constant>
+		<constant name="CORRIDOR" value="2" enum="CellType">
+			Cell containing a corridor.
+		</constant>
+	</constants>
+</class>
