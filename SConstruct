@@ -4,7 +4,7 @@ import sys
 
 from methods import print_error
 
-
+foldername = "godot2d-dungeon-generation"
 libname = "Godot2D-DungeonGenerationCpp"
 projectdir = "geracaoprocedural2d"
 
@@ -58,7 +58,7 @@ library = env.SharedLibrary(
     source=sources,
 )
 
-copy = env.Install("{}/bin/{}/".format(projectdir, env["platform"]), library)
+copy = env.Install("{}addons/{}/bin/{}/".format(projectdir, foldername, env["platform"]), library)
 
 default_args = [library, copy]
 Default(*default_args)
