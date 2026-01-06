@@ -1,4 +1,4 @@
-# Godot 2D Dungeon Generation (C++)
+# Geração de Dungeons 2D no Godot com C++
 
 <img width="438" height="318" alt="image" src="https://github.com/user-attachments/assets/0141c4c1-79ed-42cd-a1e3-eb9f70611d02" />
 
@@ -6,7 +6,7 @@ Uma extensão GDExtension para Godot Engine 4.5+ que fornece geração procedura
 
 ## 📋 Sobre o Projeto
 
-Este projeto implementa um sistema completo de geração procedural de dungeons 2D em C++ através de GDExtension, proporcionando alto desempenho e flexibilidade para criar dungeons únicos e jogáveis.
+Este projeto implementa um sistema completo de geração procedural de dungeons 2D em C++ através de GDExtension, proporcionando alto desempenho e flexibilidade para criar dungeons únicas e jogáveis.
 
 ### Características Principais
 
