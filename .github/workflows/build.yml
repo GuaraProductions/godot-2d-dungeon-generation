@@ -1,0 +1,40 @@
+name: 🛠️ Build All
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux:
+    uses: ./.github/workflows/linux.yml
+  
+  windows:
+    uses: ./.github/workflows/windows.yml
+  
+  macos:
+    uses: ./.github/workflows/macos.yml
+  
+  android:
+    uses: ./.github/workflows/android.yml
+  
+  ios:
+    uses: ./.github/workflows/ios.yml
+  
+  web:
+    uses: ./.github/workflows/web.yml
+
+  merge-all:
+    runs-on: ubuntu-latest
+    needs: [linux, windows, macos, android, ios, web]
+    steps:
+      - name: Merge All Platform Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ github.event.repository.name }}-all-platforms
+          pattern: ${{ github.event.repository.name }}-*
+          delete-merged: true
