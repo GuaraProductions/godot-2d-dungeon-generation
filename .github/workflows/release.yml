@@ -126,23 +126,77 @@ jobs:
             ${{ github.workspace }}/geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/**
             ${{ github.workspace }}/geracaoprocedural2d/addons/godot2d-dungeon-generation/*.gdextension
 
-  merge:
+  merge-linux:
     runs-on: ubuntu-latest
     needs: build
-    strategy:
-      matrix:
-        platform: [linux, windows, macos, android, ios, web, all]
     steps:
-      - name: Merge Platform Artifacts
-        if: matrix.platform != 'all'
+      - name: Merge Linux Artifacts
         uses: actions/upload-artifact/merge@v4
         with:
-          name: ${{ github.event.repository.name }}-${{ matrix.platform }}
-          pattern: gdext-${{ matrix.platform }}-*
-          delete-merged: true
+          name: ${{ github.event.repository.name }}-linux
+          pattern: gdext-linux-*
+          delete-merged: false
 
+  merge-windows:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Merge Windows Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ github.event.repository.name }}-windows
+          pattern: gdext-windows-*
+          delete-merged: false
+
+  merge-macos:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Merge macOS Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ github.event.repository.name }}-macos
+          pattern: gdext-macos-*
+          delete-merged: false
+
+  merge-android:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Merge Android Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ github.event.repository.name }}-android
+          pattern: gdext-android-*
+          delete-merged: false
+
+  merge-ios:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Merge iOS Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ github.event.repository.name }}-ios
+          pattern: gdext-ios-*
+          delete-merged: false
+
+  merge-web:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Merge Web Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ github.event.repository.name }}-web
+          pattern: gdext-web-*
+          delete-merged: false
+
+  merge-all:
+    runs-on: ubuntu-latest
+    needs: [merge-linux, merge-windows, merge-macos, merge-android, merge-ios, merge-web]
+    steps:
       - name: Merge All Artifacts
-        if: matrix.platform == 'all'
         uses: actions/upload-artifact/merge@v4
         with:
           name: ${{ github.event.repository.name }}-all-platforms
@@ -151,7 +205,7 @@ jobs:
 
   create-release:
     runs-on: ubuntu-latest
-    needs: merge
+    needs: merge-all
     permissions:
       contents: write
     steps:
