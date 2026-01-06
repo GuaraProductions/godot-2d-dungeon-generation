@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bq8iyixfc82td"]
+
+[ext_resource type="PackedScene" uid="uid://pdia42ln8fru" path="res://Teste/Sala/Dungeon1.tscn" id="1_vfa3e"]
+[ext_resource type="PackedScene" uid="uid://cvlvr0tetdgfi" path="res://Teste/Corredor/Dungeon2.tscn" id="2_pefta"]
+[ext_resource type="PackedScene" uid="uid://c0sqarall24q2" path="res://Teste/FreeCam/FreeCam.tscn" id="3_pefta"]
+
+[sub_resource type="DungeonCollectionCpp" id="DungeonCollectionCpp_r13nt"]
+scenes = Array[PackedScene]([ExtResource("1_vfa3e")])
+
+[sub_resource type="DungeonCollectionCpp" id="DungeonCollectionCpp_nykd0"]
+scenes = Array[PackedScene]([ExtResource("2_pefta")])
+
+[node name="DungeonGenerator2D" type="DungeonGenerator2D" node_paths=PackedStringArray("room_generator", "corridor_generator")]
+dungeon_size = Vector2i(25, 25)
+room_size = Vector2i(320, 320)
+on_ready = true
+room_generator = NodePath("PoissonDiskSampling")
+corridor_generator = NodePath("Primm2D")
+room_collection = SubResource("DungeonCollectionCpp_r13nt")
+corridor_collection = SubResource("DungeonCollectionCpp_nykd0")
+
+[node name="Primm2D" type="Primm2D" parent="."]
+
+[node name="PoissonDiskSampling" type="PoissonDiskSampling" parent="."]
+radius = 2
+
+[node name="FreeCam" parent="." instance=ExtResource("3_pefta")]
+SPEED = 2000.0

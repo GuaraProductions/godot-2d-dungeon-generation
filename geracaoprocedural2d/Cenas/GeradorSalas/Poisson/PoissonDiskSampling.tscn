@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://db38hhe5dibpw"]
+
+[ext_resource type="Script" uid="uid://s4hc1hbfd2n4" path="res://Script/GeradorSalas/Poisson/PoissonDiskSampling.gd" id="1_yf1to"]
+
+[node name="PoissonDiskSampling" type="Node"]
+script = ExtResource("1_yf1to")

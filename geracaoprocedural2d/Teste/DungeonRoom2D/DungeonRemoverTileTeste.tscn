@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb7na3d5qnwac"]
+
+[ext_resource type="PackedScene" uid="uid://pdia42ln8fru" path="res://Teste/Sala/Dungeon1.tscn" id="1_fn5io"]
+[ext_resource type="Script" uid="uid://ct2rxpits5it7" path="res://Teste/DungeonRoom2D/DungeonRemoverTileTest.gd" id="1_fyjhp"]
+
+[node name="DungeonRemoverTileTeste" type="Node2D"]
+script = ExtResource("1_fyjhp")
+
+[node name="Dungeon1" parent="." instance=ExtResource("1_fn5io")]
+position = Vector2(609, 301)

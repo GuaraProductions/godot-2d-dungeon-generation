@@ -1,0 +1,4 @@
+[gd_resource type="DungeonCollectionCpp" format=3 uid="uid://cw72qhnuc7p7q"]
+
+[resource]
+scenes = Array[PackedScene]([null])

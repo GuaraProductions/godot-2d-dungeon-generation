@@ -1,0 +1,41 @@
+[gd_scene load_steps=11 format=3 uid="uid://dqstq861sj4lf"]
+
+[ext_resource type="PackedScene" uid="uid://clrga4owtdo4r" path="res://Cenas/Dungeons/GeradorDungeon2D/GeradorDungeon2D.tscn" id="1_m7sq1"]
+[ext_resource type="PackedScene" uid="uid://pdia42ln8fru" path="res://Teste/Sala/Dungeon1.tscn" id="2_3rmgw"]
+[ext_resource type="Script" uid="uid://b11gk51253y5m" path="res://Script/Dungeons/Collection/DungeonCollection.gd" id="3_0mfhq"]
+[ext_resource type="PackedScene" uid="uid://cvlvr0tetdgfi" path="res://Teste/Corredor/Dungeon2.tscn" id="4_814ql"]
+[ext_resource type="Resource" uid="uid://dm76aot6djh1l" path="res://Teste/dungeon_cache.tres" id="5_0mfhq"]
+[ext_resource type="Script" uid="uid://ldyl176qfl0p" path="res://Script/GeradorDeCorredor/Prim/Primm.gd" id="6_814ql"]
+[ext_resource type="Script" uid="uid://s4hc1hbfd2n4" path="res://Script/GeradorSalas/Poisson/PoissonDiskSampling.gd" id="7_iy3mi"]
+[ext_resource type="PackedScene" uid="uid://c0sqarall24q2" path="res://Teste/FreeCam/FreeCam.tscn" id="8_814ql"]
+
+[sub_resource type="Resource" id="Resource_iy3mi"]
+script = ExtResource("3_0mfhq")
+cenas = Array[PackedScene]([ExtResource("2_3rmgw")])
+metadata/_custom_type_script = "uid://b11gk51253y5m"
+
+[sub_resource type="Resource" id="Resource_j3boc"]
+script = ExtResource("3_0mfhq")
+cenas = Array[PackedScene]([ExtResource("4_814ql")])
+metadata/_custom_type_script = "uid://b11gk51253y5m"
+
+[node name="GeradorDungeon2dTest" type="Node2D"]
+
+[node name="GeradorDeDungeon" parent="." node_paths=PackedStringArray("gerador_de_salas", "gerador_de_corredores") instance=ExtResource("1_m7sq1")]
+executar_no_ready = true
+tamanho_dungeon = Vector2i(25, 25)
+gerador_de_salas = NodePath("PoissonDiskSampling")
+gerador_de_corredores = NodePath("Primm")
+dungeons = SubResource("Resource_iy3mi")
+corredores = SubResource("Resource_j3boc")
+tamanho_sala = Vector2i(320, 320)
+dungeon_cache = ExtResource("5_0mfhq")
+
+[node name="Primm" type="Node" parent="GeradorDeDungeon"]
+script = ExtResource("6_814ql")
+
+[node name="PoissonDiskSampling" type="Node" parent="GeradorDeDungeon"]
+script = ExtResource("7_iy3mi")
+
+[node name="FreeCam" parent="." instance=ExtResource("8_814ql")]
+SPEED = 2000.0

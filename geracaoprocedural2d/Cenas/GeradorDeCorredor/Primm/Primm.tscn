@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgetkdpre5wfq"]
+
+[ext_resource type="Script" uid="uid://ldyl176qfl0p" path="res://Script/GeradorDeCorredor/Prim/Primm.gd" id="1_kv54w"]
+
+[node name="Primm" type="Node"]
+script = ExtResource("1_kv54w")
