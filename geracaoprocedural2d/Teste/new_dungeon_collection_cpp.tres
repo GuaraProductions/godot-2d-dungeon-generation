@@ -1,4 +1,6 @@
-[gd_resource type="DungeonCollectionCpp" format=3 uid="uid://cw72qhnuc7p7q"]
+[gd_resource type="DungeonCollectionCpp" load_steps=2 format=3 uid="uid://cw72qhnuc7p7q"]
+
+[ext_resource type="PackedScene" uid="uid://cvlvr0tetdgfi" path="res://Teste/Corredor/Dungeon2.tscn" id="1_xgadu"]
 
 [resource]
-scenes = Array[PackedScene]([null])
+scenes = Array[PackedScene]([ExtResource("1_xgadu")])
