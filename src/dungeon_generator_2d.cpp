@@ -8,7 +8,28 @@ using namespace godot;
 
 void DungeonGenerator2D::_bind_methods() {
 
+	ClassDB::bind_method(D_METHOD("create_room", "position", "direction"), &DungeonGenerator2D::create_room);
+	ClassDB::bind_method(D_METHOD("create_corridor", "position"), &DungeonGenerator2D::create_corridor);
+	ClassDB::bind_method(D_METHOD("get_dungeon_in", "position"), &DungeonGenerator2D::get_dungeon_in);
+	ClassDB::bind_method(D_METHOD("exists_dungeon_in", "position"), &DungeonGenerator2D::exists_dungeon_in);
+	ClassDB::bind_method(D_METHOD("is_empty", "position"), &DungeonGenerator2D::is_empty);
 	ClassDB::bind_method(D_METHOD("print_dungeon_in_text"), &DungeonGenerator2D::print_dungeon_in_text);	
+
+
+	ClassDB::bind_method(D_METHOD("get_dungeon_size"), &DungeonGenerator2D::get_dungeon_size);
+	ClassDB::bind_method(D_METHOD("set_dungeon_size","p_dungeon_size"), &DungeonGenerator2D::set_dungeon_size);
+	ADD_PROPERTY(PropertyInfo(Variant::VECTOR2I, "dungeon_size"), "set_dungeon_size", "get_dungeon_size");
+
+	ClassDB::bind_method(D_METHOD("get_room_size"), &DungeonGenerator2D::get_room_size);
+	ClassDB::bind_method(D_METHOD("set_room_size","p_room_size"), &DungeonGenerator2D::set_room_size);
+	ADD_PROPERTY(PropertyInfo(Variant::VECTOR2I, "room_size"), "set_room_size", "get_room_size");
+
+	ClassDB::bind_method(D_METHOD("get_on_ready"), &DungeonGenerator2D::get_on_ready);
+	ClassDB::bind_method(D_METHOD("set_on_ready", "p_on_ready"), &DungeonGenerator2D::set_on_ready);
+	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "on_ready"), 
+	             "set_on_ready", "get_on_ready"); 
+
+	ADD_GROUP("Generators", "");
 
 	ClassDB::bind_method(D_METHOD("get_room_generator"), &DungeonGenerator2D::get_room_generator);
 	ClassDB::bind_method(D_METHOD("set_room_generator", "p_room_generator"), &DungeonGenerator2D::set_room_generator);
@@ -31,6 +52,8 @@ void DungeonGenerator2D::_bind_methods() {
 			"CorridorGenerator"), 
 		"set_corridor_generator",
 		"get_corridor_generator");
+
+	ADD_GROUP("Collections", "");
 
     ClassDB::bind_method(D_METHOD("get_room_collection"), &DungeonGenerator2D::get_room_collection);
     ClassDB::bind_method(D_METHOD("set_room_collection", "p_room_collection"), &DungeonGenerator2D::set_room_collection);
@@ -58,11 +81,6 @@ void DungeonGenerator2D::_bind_methods() {
 	"get_corridor_collection"
 	);
 
-	ClassDB::bind_method(D_METHOD("get_on_ready"), &DungeonGenerator2D::get_on_ready);
-	ClassDB::bind_method(D_METHOD("set_on_ready", "p_on_ready"), &DungeonGenerator2D::set_on_ready);
-	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "on_ready"), 
-	             "set_on_ready", "get_on_ready"); 
-
 	ClassDB::bind_method(D_METHOD("get_use_cache"), &DungeonGenerator2D::get_use_cache);
 	ClassDB::bind_method(D_METHOD("set_use_cache", "p_use_cache"), &DungeonGenerator2D::set_use_cache);
 	
@@ -71,23 +89,11 @@ void DungeonGenerator2D::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "use_cache", PROPERTY_HINT_NONE), 
 	             "set_use_cache", "get_use_cache"); 
 
+	ADD_GROUP("Debug", "");
+
 	ClassDB::bind_method(D_METHOD("get_print_in_terminal"), &DungeonGenerator2D::get_print_in_terminal);
 	ClassDB::bind_method(D_METHOD("set_print_in_terminal","value"), &DungeonGenerator2D::set_print_in_terminal);
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "print_in_terminal"), "set_print_in_terminal", "get_print_in_terminal");
-
-	ClassDB::bind_method(D_METHOD("get_dungeon_size"), &DungeonGenerator2D::get_dungeon_size);
-	ClassDB::bind_method(D_METHOD("set_dungeon_size","p_dungeon_size"), &DungeonGenerator2D::set_dungeon_size);
-	ADD_PROPERTY(PropertyInfo(Variant::VECTOR2I, "dungeon_size"), "set_dungeon_size", "get_dungeon_size");
-
-	ClassDB::bind_method(D_METHOD("get_room_size"), &DungeonGenerator2D::get_room_size);
-	ClassDB::bind_method(D_METHOD("set_room_size","p_room_size"), &DungeonGenerator2D::set_room_size);
-	ADD_PROPERTY(PropertyInfo(Variant::VECTOR2I, "room_size"), "set_room_size", "get_room_size");
-
-	ClassDB::bind_method(D_METHOD("create_room", "position", "direction"), &DungeonGenerator2D::create_room);
-	ClassDB::bind_method(D_METHOD("create_corridor", "position"), &DungeonGenerator2D::create_corridor);
-	ClassDB::bind_method(D_METHOD("get_dungeon_in", "position"), &DungeonGenerator2D::get_dungeon_in);
-	ClassDB::bind_method(D_METHOD("exists_dungeon_in", "position"), &DungeonGenerator2D::exists_dungeon_in);
-	ClassDB::bind_method(D_METHOD("is_empty", "position"), &DungeonGenerator2D::is_empty);
 
 	BIND_ENUM_CONSTANT(EMPTY);
 	BIND_ENUM_CONSTANT(ROOM);

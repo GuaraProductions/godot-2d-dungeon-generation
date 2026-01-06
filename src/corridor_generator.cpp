@@ -27,8 +27,6 @@ void CorridorGenerator::_ready() {
     Node* node_pai = get_parent();
 
     dungeon_generator = node_pai;
-
-	godot::UtilityFunctions::print("DungeonGenerator: ", dungeon_generator);
 }
 
 void CorridorGenerator::generate_corridor(TypedArray<Vector2i> points) {

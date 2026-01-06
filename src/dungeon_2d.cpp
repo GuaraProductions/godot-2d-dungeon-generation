@@ -32,18 +32,14 @@ void Dungeon2DCpp::_ready() {
 
         exits_and_vectors[marker->get_direction()] = marker;
     }
-
-    godot::UtilityFunctions::print("dictionary: ", exits_and_vectors);
 }
 
 void Dungeon2DCpp::remove_tile_from_door(Vector2i direction) {
-
     if (exits_and_vectors.has(direction)) {
+        VectorMarker2DCpp* vector_direction = Object::cast_to<VectorMarker2DCpp>(exits_and_vectors[direction]);
 
-        VectorMarker2DCpp* direction = Object::cast_to<VectorMarker2DCpp>(exits_and_vectors[direction]);
-
-        for (int i = 0; i < get_child_count(); i++) {
-            VectorMarker2DCpp* child = Object::cast_to<VectorMarker2DCpp>(get_child(i));
+        for (int i = 0; i < vector_direction->get_child_count(); i++) {
+            Node* child = Object::cast_to<Node>(vector_direction->get_child(i));
             if (child) {
                 child->queue_free();
                 child = nullptr;
