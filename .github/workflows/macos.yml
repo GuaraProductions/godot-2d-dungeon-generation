@@ -48,14 +48,3 @@ jobs:
           name: gdext-${{ matrix.platform }}-${{ matrix.arch }}-${{ matrix.target }}
           path: |
             ${{ github.workspace }}/geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/**
-
-  merge:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Merge Artifacts
-        uses: actions/upload-artifact/merge@v4
-        with:
-          name: ${{ github.event.repository.name }}-macos
-          pattern: gdext-macos-*
-          delete-merged: true

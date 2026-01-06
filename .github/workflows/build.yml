@@ -28,9 +28,75 @@ jobs:
   web:
     uses: ./.github/workflows/web.yml
 
+  merge-linux:
+    runs-on: ubuntu-latest
+    needs: linux
+    steps:
+      - name: Merge Linux Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ github.event.repository.name }}-linux
+          pattern: gdext-linux-*
+          delete-merged: true
+
+  merge-windows:
+    runs-on: ubuntu-latest
+    needs: windows
+    steps:
+      - name: Merge Windows Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ github.event.repository.name }}-windows
+          pattern: gdext-windows-*
+          delete-merged: true
+
+  merge-macos:
+    runs-on: ubuntu-latest
+    needs: macos
+    steps:
+      - name: Merge macOS Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ github.event.repository.name }}-macos
+          pattern: gdext-macos-*
+          delete-merged: true
+
+  merge-android:
+    runs-on: ubuntu-latest
+    needs: android
+    steps:
+      - name: Merge Android Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ github.event.repository.name }}-android
+          pattern: gdext-android-*
+          delete-merged: true
+
+  merge-ios:
+    runs-on: ubuntu-latest
+    needs: ios
+    steps:
+      - name: Merge iOS Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ github.event.repository.name }}-ios
+          pattern: gdext-ios-*
+          delete-merged: true
+
+  merge-web:
+    runs-on: ubuntu-latest
+    needs: web
+    steps:
+      - name: Merge Web Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ github.event.repository.name }}-web
+          pattern: gdext-web-*
+          delete-merged: true
+
   merge-all:
     runs-on: ubuntu-latest
-    needs: [linux, windows, macos, android, ios, web]
+    needs: [merge-linux, merge-windows, merge-macos, merge-android, merge-ios, merge-web]
     steps:
       - name: Merge All Platform Artifacts
         uses: actions/upload-artifact/merge@v4

@@ -49,9 +49,10 @@ jobs:
       - name: Prepare Files
         shell: sh
         run: |
-          ls -l geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/linux/
-          strip geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/linux/*.so
-          ls -l geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/linux/
+          if [ -d "geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/linux" ]; then
+            ls -l geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/linux/
+            strip geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/linux/*.so || true
+          fi
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -59,14 +60,3 @@ jobs:
           name: gdext-${{ matrix.platform }}-${{ matrix.arch }}-${{ matrix.target }}
           path: |
             ${{ github.workspace }}/geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/**
-
-  merge:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Merge Artifacts
-        uses: actions/upload-artifact/merge@v4
-        with:
-          name: ${{ github.event.repository.name }}-linux
-          pattern: gdext-linux-*
-          delete-merged: true
