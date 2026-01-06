@@ -133,10 +133,22 @@ jobs:
   merge:
     runs-on: ubuntu-latest
     needs: build
+    strategy:
+      matrix:
+        platform: [linux, windows, macos, android, ios, web, all]
     steps:
-      - name: Merge Artifacts
+      - name: Merge Platform Artifacts
+        if: matrix.platform != 'all'
         uses: actions/upload-artifact/merge@v4
         with:
-          name: ${{ github.event.repository.name }}
+          name: ${{ github.event.repository.name }}-${{ matrix.platform }}
+          pattern: gdext-${{ matrix.platform }}-*
+          delete-merged: true
+
+      - name: Merge All Artifacts
+        if: matrix.platform == 'all'
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ github.event.repository.name }}-all-platforms
           pattern: gdext-*
           delete-merged: true
