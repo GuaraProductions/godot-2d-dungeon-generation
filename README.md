@@ -77,14 +77,6 @@ Isso baixará a biblioteca `godot-cpp` necessária.
 
 ## 🔨 Compilação
 
-### Build para Editor (com documentação)
-
-```bash
-scons target=editor
-```
-
-Este comando compila a extensão para uso no Godot Editor e **embute toda a documentação XML** nos binários, permitindo que o editor mostre tooltips e ajuda contextual.
-
 ### Build para Debug (exportação de jogos)
 
 ```bash
@@ -114,7 +106,7 @@ scons platform=linux arch=arm64 target=editor
 
 ### Visualizando a Documentação no Editor
 
-Após compilar com `target=editor`, a documentação estará disponível no Godot Editor:
+Após compilar com `target=editor` ou `target=template_debug`, a documentação estará disponível no Godot Editor:
 
 1. Abra o projeto no Godot Editor
 2. Pressione **F1** ou clique em "Pesquisar Ajuda"
@@ -254,7 +246,7 @@ godot-2d-dungeon-generation/
 
 ### Documentação não aparece no Editor
 
-1. Verifique se compilou com `target=editor`
+1. Verifique se compilou com `target=editor` ou `target=template_debug`
 2. Confirme que o arquivo `.gdextension` aponta para o build correto:
    ```ini
    linux.x86_64.editor = "./linux/libGodot2D-DungeonGenerationCpp.linux.editor.x86_64.so"
@@ -278,7 +270,7 @@ scons target=editor
 ### Extension não carrega
 
 1. Verifique o console do Godot para erros
-2. Confirme que o `entry_symbol` está correto: `example_library_init`
+2. Confirme que o `entry_symbol` está correto
 3. Verifique que os arquivos `.so`/`.dll` existem nos diretórios corretos
 
 ## 🤝 Contribuindo
