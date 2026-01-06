@@ -10,97 +10,132 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  linux:
-    uses: ./.github/workflows/linux.yml
-  
-  windows:
-    uses: ./.github/workflows/windows.yml
-  
-  macos:
-    uses: ./.github/workflows/macos.yml
-  
-  android:
-    uses: ./.github/workflows/android.yml
-  
-  ios:
-    uses: ./.github/workflows/ios.yml
-  
-  web:
-    uses: ./.github/workflows/web.yml
+  build:
+    name: ${{ matrix.name }} ${{ matrix.target }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        identifier: [linux-x86_64, linux-arm64, windows-x86_64, windows-x86_32, macos, ios, android-arm64, android-x86_64, web]
+        target: [template_debug, template_release]
+        include:
+          - identifier: linux-x86_64
+            platform: linux
+            name: 🐧 Linux x64
+            runner: ubuntu-22.04
+            arch: x86_64
+            
+          - identifier: linux-arm64
+            platform: linux
+            name: 🐧 Linux ARM64
+            runner: ubuntu-22.04-arm
+            arch: arm64
 
-  merge-linux:
-    runs-on: ubuntu-latest
-    needs: linux
+          - identifier: windows-x86_64
+            platform: windows
+            name: 🪟 Windows x64
+            runner: windows-latest
+            arch: x86_64
+
+          - identifier: windows-x86_32
+            platform: windows
+            name: 🪟 Windows x86
+            runner: windows-latest
+            arch: x86_32
+
+          - identifier: macos
+            platform: macos
+            name: 🍎 macOS
+            runner: macos-latest
+            arch: universal
+
+          - identifier: ios
+            platform: ios
+            name: 🍏 iOS
+            runner: macos-latest
+            arch: arm64
+
+          - identifier: android-arm64
+            platform: android
+            name: 🤖 Android ARM64
+            runner: ubuntu-22.04
+            arch: arm64
+
+          - identifier: android-x86_64
+            platform: android
+            name: 🤖 Android x64
+            runner: ubuntu-22.04
+            arch: x86_64
+
+          - identifier: web
+            platform: web
+            name: 🌐 Web
+            runner: ubuntu-22.04
+            arch: wasm32
+
     steps:
-      - name: Merge Linux Artifacts
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+        
+      - name: Setup godot-cpp
+        uses: ./godot-cpp/.github/actions/setup-godot-cpp
+        with:
+          platform: ${{ matrix.platform }}
+          em-version: 3.1.62
+
+      - name: Restore .scons_cache
+        uses: ./godot-cpp/.github/actions/godot-cache-restore
+        with:
+          scons-cache: ${{ github.workspace }}/.scons-cache/
+          cache-name: ${{ matrix.identifier }}-${{ matrix.target }}
+        continue-on-error: true
+
+      - name: Build GDExtension
+        env:
+          SCONS_CACHE: ${{ github.workspace }}/.scons-cache/
+        shell: sh
+        run: |
+          scons target=${{ matrix.target }} platform=${{ matrix.platform }} arch=${{ matrix.arch }}
+
+      - name: Save .scons_cache
+        uses: ./godot-cpp/.github/actions/godot-cache-save
+        with:
+          scons-cache: ${{ github.workspace }}/.scons-cache/
+          cache-name: ${{ matrix.identifier }}-${{ matrix.target }}
+        continue-on-error: true
+
+      - name: Strip Libraries (Linux)
+        if: ${{ matrix.platform == 'linux' }}
+        shell: sh
+        run: |
+          if [ -d "geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/linux" ]; then
+            strip geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/linux/*.so || true
+          fi
+
+      - name: Clean up compilation files (Windows)
+        if: ${{ matrix.platform == 'windows' }}
+        shell: pwsh
+        run: |
+          if (Test-Path "geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/windows") {
+            Remove-Item geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/windows/* -Include *.exp,*.lib,*.pdb -Force -ErrorAction SilentlyContinue
+          }
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gdext-${{ matrix.identifier }}-${{ matrix.target }}
+          path: |
+            ${{ github.workspace }}/geracaoprocedural2d/addons/godot2d-dungeon-generation/bin/**
+
+  merge:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Merge Artifacts
         uses: actions/upload-artifact/merge@v4
         with:
-          name: ${{ github.event.repository.name }}-linux
-          pattern: gdext-linux-*
-          delete-merged: true
-
-  merge-windows:
-    runs-on: ubuntu-latest
-    needs: windows
-    steps:
-      - name: Merge Windows Artifacts
-        uses: actions/upload-artifact/merge@v4
-        with:
-          name: ${{ github.event.repository.name }}-windows
-          pattern: gdext-windows-*
-          delete-merged: true
-
-  merge-macos:
-    runs-on: ubuntu-latest
-    needs: macos
-    steps:
-      - name: Merge macOS Artifacts
-        uses: actions/upload-artifact/merge@v4
-        with:
-          name: ${{ github.event.repository.name }}-macos
-          pattern: gdext-macos-*
-          delete-merged: true
-
-  merge-android:
-    runs-on: ubuntu-latest
-    needs: android
-    steps:
-      - name: Merge Android Artifacts
-        uses: actions/upload-artifact/merge@v4
-        with:
-          name: ${{ github.event.repository.name }}-android
-          pattern: gdext-android-*
-          delete-merged: true
-
-  merge-ios:
-    runs-on: ubuntu-latest
-    needs: ios
-    steps:
-      - name: Merge iOS Artifacts
-        uses: actions/upload-artifact/merge@v4
-        with:
-          name: ${{ github.event.repository.name }}-ios
-          pattern: gdext-ios-*
-          delete-merged: true
-
-  merge-web:
-    runs-on: ubuntu-latest
-    needs: web
-    steps:
-      - name: Merge Web Artifacts
-        uses: actions/upload-artifact/merge@v4
-        with:
-          name: ${{ github.event.repository.name }}-web
-          pattern: gdext-web-*
-          delete-merged: true
-
-  merge-all:
-    runs-on: ubuntu-latest
-    needs: [merge-linux, merge-windows, merge-macos, merge-android, merge-ios, merge-web]
-    steps:
-      - name: Merge All Platform Artifacts
-        uses: actions/upload-artifact/merge@v4
-        with:
-          name: ${{ github.event.repository.name }}-all-platforms
-          pattern: ${{ github.event.repository.name }}-*
+          name: ${{ github.event.repository.name }}
+          pattern: gdext-*
           delete-merged: true
