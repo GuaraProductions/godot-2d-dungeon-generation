@@ -9,7 +9,7 @@ reloadable=true
 macos.single.debug = "./bin/macos/libGodot2D-DungeonGenerationCpp.macos.template_debug.dylib"
 macos.double.debug = "./bin/macos/libGodot2D-DungeonGenerationCpp.macos.template_debug.double.dylib"
 macos.single.release = "./bin/macos/libGodot2D-DungeonGenerationCpp.macos.template_release.dylib"
-macos.double.release = "./bin/bin/macos/libGodot2D-DungeonGenerationCpp.macos.template_debug.double.dylib"
+macos.double.release = "./bin/macos/libGodot2D-DungeonGenerationCpp.macos.template_debug.double.dylib"
 
 ios.arm64.single.debug = "./bin/ios/libGodot2D-DungeonGenerationCpp.ios.template_debug.arm64.dylib"
 ios.arm64.double.debug = "./bin/ios/libGodot2D-DungeonGenerationCpp.ios.template_debug.arm64.double.dylib"
@@ -19,7 +19,7 @@ ios.arm64.double.release = "./bin/ios/libGodot2D-DungeonGenerationCpp.ios.templa
 windows.x86_32.single.debug = "./bin/windows/Godot2D-DungeonGenerationCpp.windows.template_debug.x86_32.dll"
 windows.x86_32.double.debug = "./bin/windows/Godot2D-DungeonGenerationCpp.windows.template_debug.x86_32.double.dll"
 windows.x86_32.single.release = "./bin/windows/Godot2D-DungeonGenerationCpp.windows.template_release.x86_32.dll"
-windows.x86_32.double.release = "./bin/bin/windows/Godot2D-DungeonGenerationCpp.windows.template_release.x86_32.double.dll"
+windows.x86_32.double.release = "./bin/windows/Godot2D-DungeonGenerationCpp.windows.template_release.x86_32.double.dll"
 
 windows.x86_64.single.debug = "./bin/windows/Godot2D-DungeonGenerationCpp.windows.template_debug.x86_64.dll"
 windows.x86_64.double.debug = "./bin/windows/Godot2D-DungeonGenerationCpp.windows.template_debug.x86_64.double.dll"
@@ -31,17 +31,17 @@ linux.x86_64.template_debug = "./bin/linux/libGodot2D-DungeonGenerationCpp.linux
 
 linux.x86_64.double.debug = "./bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_debug.x86_64.double.so"
 linux.x86_64.single.release = "./bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_release.x86_64.so"
-linux.x86_64.double.release = "./bin/bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_release.x86_64.double.so"
+linux.x86_64.double.release = "./bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_release.x86_64.double.so"
 
 linux.arm64.single.debug = "./bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_debug.arm64.so"
 linux.arm64.double.debug = "./bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_debug.arm64.double.so"
 linux.arm64.single.release = "./bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_release.arm64.so"
-linux.arm64.double.release = "./bin/bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_release.arm64.double.so"
+linux.arm64.double.release = "./bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_release.arm64.double.so"
 
 linux.rv64.single.debug = "./bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_debug.rv64.so"
 linux.rv64.double.debug = "./bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_debug.rv64.double.so"
 linux.rv64.single.release = "./bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_release.rv64.so"
-linux.rv64.double.release = "./bin/bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_release.rv64.double.so"
+linux.rv64.double.release = "./bin/linux/libGodot2D-DungeonGenerationCpp.linux.template_release.rv64.double.so"
 
 android.x86_64.single.debug = "./bin/android/libGodot2D-DungeonGenerationCpp.android.template_debug.x86_64.so"
 android.x86_64.double.debug = "./bin/android/libGodot2D-DungeonGenerationCpp.android.template_debug.x86_64.double.so"
